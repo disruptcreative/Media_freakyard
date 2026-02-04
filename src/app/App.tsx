@@ -784,6 +784,41 @@ const SOCIAL_RUN_OF_SHOW = [
   }
 ];
 
+const VIDEO_UPLOAD_LINKS = [
+  {
+    label: "Video Upload Folder",
+    href: "https://drive.google.com/drive/folders/1xgV6OEawFORzIJvP-9d7HEB-hnBMhQON"
+  },
+  {
+    label: "Videos Folder",
+    href: "https://drive.google.com/drive/folders/1MydNMZy22UQvAndvbx2lM4cpsKst61aH"
+  }
+];
+
+const UploadLinksCard = () => (
+  <Card className="bg-zinc-900 border-zinc-800">
+    <CardHeader>
+      <CardTitle className="text-[#FFBF00]">Upload Links</CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-3">
+      <p className="text-sm text-zinc-400">Use the correct folder for every delivery. Do not mix uploads.</p>
+      <div className="flex flex-wrap gap-3">
+        {VIDEO_UPLOAD_LINKS.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center rounded-lg bg-[#FFBF00] px-4 py-2 text-xs font-bold uppercase tracking-wider text-black transition-colors hover:bg-[#FFBF00]/90"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+);
+
 export default function App() {
   const [isAuthed, setIsAuthed] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
@@ -905,6 +940,7 @@ export default function App() {
 
           {/* 0. SCHEDULE TAB (NEW) */}
            <TabsContent value="schedule" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+             <UploadLinksCard />
              <div className="text-center space-y-4 mb-12">
                 <h2 className="text-3xl font-black uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#FFBF00] to-cyan-400">
                   Operation Timeline
@@ -938,16 +974,19 @@ export default function App() {
 
           {/* 0.5 MASTER PLAN TAB (KANBAN) */}
           <TabsContent value="masterplan" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+             <UploadLinksCard />
              <MasterPlanBoard />
           </TabsContent>
 
           {/* 0.6 PRODUCTION MATRIX TAB (NEW) */}
           <TabsContent value="matrix" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+             <UploadLinksCard />
              <ProductionMatrix />
           </TabsContent>
 
           {/* 1. OVERVIEW / MISSION TAB */}
           <TabsContent value="overview" className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <UploadLinksCard />
             
             {/* The Vision */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -1076,108 +1115,121 @@ export default function App() {
           {/* 2. PHOTOGRAPHY TAB */}
           <TabsContent value="photo" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
              
-             {/* TECHNICAL SPECS */}
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <UploadLinksCard />
+             
+             {/* PHOTOGRAPHY QUICK GUIDE */}
+             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <TechSpecCard 
                   title="File Protocols" 
                   icon={<FileDigit className="text-cyan-400" />}
                   specs={[
                     "Format: RAW + JPG (Fine)",
-                    "Color Space: sRGB (for immediate social export)",
-                    "Naming: YYYYMMDD_STAGE_PHOTOGRAPHER_001.ARW"
+                    "Color Space: sRGB (immediate social export)",
+                    "Keep a mirrored JPG folder for fast delivery"
                   ]}
                 />
                 <TechSpecCard 
-                  title="Gear Essentials" 
+                  title="Capture Rules" 
                   icon={<Settings className="text-[#FFBF00]" />}
                   specs={[
-                    "Fast Glass: f/2.8 or faster mandatory.",
-                    "On-camera flash: ONLY for crowd portraits (Rear-curtain sync).",
-                    "No flash for stage acts unless authorized.",
-                    "Battery grip recommended for 10hr+ shifts."
+                    "Fast glass: f/2.8 or faster mandatory",
+                    "No flash on stage unless authorized",
+                    "Flash only for crowd portraits (rear-curtain sync)",
+                    "Minimum shutter: 1/250 crowd, 1/500 stage"
+                  ]}
+                />
+                <TechSpecCard 
+                  title="Delivery Timing" 
+                  icon={<Clock className="text-pink-400" />}
+                  specs={[
+                    "Live gallery: continuous uploads",
+                    "Top 20 selects: within 2 hours of gates",
+                    "Full edited gallery: by 10:00 AM next day",
+                    "Best of Festival: Top 50 after final night"
                   ]}
                 />
              </div>
 
-             {/* PHASE 1 */}
-             <div className="space-y-2">
-                <Badge variant="outline" className="border-cyan-500 text-cyan-500">PHASE 1: THE WARM UP (FEB 1-4)</Badge>
-                <BriefSection 
-                  mood="cyber"
-                  title="Pre-Party & Prep"
-                  role="Atmosphere"
-                  description="Setting the scene. Empty venue shots, construction time-lapses, and the exclusive Feb 3rd Pre-Party."
-                  responsibilities={[
-                    "Feb 1-2: Capture 'Work in Progress' shots. Sparks flying, sound/light tests.",
-                    "Feb 3 (Pre-Party): Low light mastery. Capture the 'Inner Circle' vibe. No flash if possible.",
-                    "Feb 4: Artist arrivals. Soundcheck portraits (Black & White style)."
-                  ]}
-                  deliverables={[
-                    "10x 'Hype' photos for stories (Vertical) per day.",
-                    "50x High-quality Pre-party selects.",
-                  ]}
-                />
-             </div>
+             <Card className="bg-zinc-900 border-zinc-800">
+               <CardHeader>
+                 <CardTitle className="text-[#FFBF00]">Shot Priority Stack (Easy Wins First)</CardTitle>
+               </CardHeader>
+               <CardContent className="space-y-2">
+                 <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                   <li>Wide scale: Mainstage + crowd density.</li>
+                   <li>People portraits: energy, fashion, group shots.</li>
+                   <li>Stage moments: drops, confetti, silhouettes, hands.</li>
+                   <li>Downtown + House of Freaks: social anchor and details.</li>
+                   <li>VIP - GENERAL and VIP BOXES (EACH BOX) ambience.</li>
+                 </ul>
+               </CardContent>
+             </Card>
 
-             {/* PHASE 2 */}
-             <div className="space-y-2">
-                <Badge variant="outline" className="border-[#FFBF00] text-[#FFBF00]">PHASE 2: WEEKEND 1 (FEB 5-6)</Badge>
-                   <BriefSection 
-                     mood="toxic"
-                     title="Team Tarik: The Engagement Ops"
-                     role="Engagement Unit"
-                     description="Capture. Connect. Upload. Every face matters."
-                   responsibilities={[
-                     "Use Ring Lights aggressively. Even in daytime if needed for that 'studio' look.",
-                     "Guide attendees to Activation Screens. 'Check your photo now!'",
-                     "Shoot vertical + horizontal options.",
-                     "HYPE THEM UP. You are not just a photographer, you are an entertainer."
-                   ]}
-                   deliverables={[
-                     "Continuous upload stream to the live gallery.",
-                     "Min 500+ usable attendee portraits per day.",
-                     "Zero blurry shots. High shutter speed is your friend."
-                   ]}
-                   notes="If the internet lags, keep shooting and bulk upload when stable. Do not stop the flow."
-                 />
-                 <BriefSection 
-                   mood="neon"
-                   title="Editorial & Stage"
-                   role="Artistic Unit"
-                   responsibilities={[
-                     "Hero moments: Confetti, Pyro, Drops.",
-                     "Silhouette shots against the massive LED screens.",
-                     "Detail shots: Food, Fashion, Decor, Mud, Boots, Hands.",
-                   ]}
-                   deliverables={[
-                     "Top 20 'Bangers' delivered within 2 hours of gates open.",
-                     "Full gallery (Edited) by 10 AM next day.",
-                   ]}
-                 />
-             </div>
+             <Card className="bg-zinc-900 border-zinc-800">
+               <CardHeader>
+                 <CardTitle className="text-[#FFBF00]">Dates & Focus</CardTitle>
+               </CardHeader>
+               <CardContent className="space-y-2">
+                 <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                   <li>Feb 1-4: Build, pre-party, and setup atmosphere.</li>
+                   <li>Feb 5-6: Weekend 1 scale + energy.</li>
+                   <li>Feb 12-13: Weekend 2 emotion + final moments.</li>
+                 </ul>
+               </CardContent>
+             </Card>
 
-             {/* PHASE 3 */}
-             <div className="space-y-2">
-                <Badge variant="outline" className="border-pink-500 text-pink-500">PHASE 3: WEEKEND 2 (FEB 12-13)</Badge>
-                <BriefSection 
-                  mood="cyber"
-                  title="The Grand Finale"
-                  role="Legacy"
-                  description="The final push. We know the lighting cues now. We know the crowd. Get the shots we missed."
-                  responsibilities={[
-                    "Capture the 'Exhausted but Happy' emotion.",
-                    "More interaction shots between strangers.",
-                    "The Final Closing Ceremony - this is the money shot."
-                  ]}
-                  deliverables={[
-                    "Best of Festival Collection (Top 50 All-time).",
-                  ]}
-                />
-             </div>
+             <Card className="bg-zinc-900 border-zinc-800">
+               <CardHeader>
+                 <CardTitle className="text-cyan-400">Coverage Map (What Must Be Captured)</CardTitle>
+               </CardHeader>
+               <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-zinc-300">
+                 <div className="bg-black/40 border border-zinc-800 rounded p-3">
+                   <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Mainstage</div>
+                   <p className="mt-2">Wide crowd, laser moments, DJ hands, FOH view.</p>
+                 </div>
+                 <div className="bg-black/40 border border-zinc-800 rounded p-3">
+                   <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Underground</div>
+                   <p className="mt-2">Low-light energy, density, silhouettes, crowd movement.</p>
+                 </div>
+                 <div className="bg-black/40 border border-zinc-800 rounded p-3">
+                   <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">House of Freaks</div>
+                   <p className="mt-2">Costumes, textures, close-ups, intimate moments.</p>
+                 </div>
+                 <div className="bg-black/40 border border-zinc-800 rounded p-3">
+                   <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Downtown</div>
+                   <p className="mt-2">Social anchor, people resting, group moments.</p>
+                 </div>
+                 <div className="bg-black/40 border border-zinc-800 rounded p-3">
+                   <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">VIP - GENERAL</div>
+                   <p className="mt-2">Calm premium atmosphere, lounge, small groups.</p>
+                 </div>
+                 <div className="bg-black/40 border border-zinc-800 rounded p-3">
+                   <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">VIP BOXES (EACH BOX)</div>
+                   <p className="mt-2">Box interiors, service moments, wide + detail.</p>
+                 </div>
+               </CardContent>
+             </Card>
+
+             <Card className="bg-zinc-900 border-zinc-800">
+               <CardHeader>
+                 <CardTitle className="text-pink-400">On-Show Workflow</CardTitle>
+               </CardHeader>
+               <CardContent className="space-y-2">
+                 <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                   <li>Capture in both vertical and horizontal for every key moment.</li>
+                   <li>Upload frequently to keep the live gallery fresh.</li>
+                   <li>Use the correct Drive folder for every upload. Do not mix.</li>
+                   <li>Tag by stage + time so Social can find fast.</li>
+                   <li>Respectful coverage only. Avoid shooting people not appropriately dressed.</li>
+                 </ul>
+               </CardContent>
+             </Card>
           </TabsContent>
 
           {/* 3. VIDEO TAB */}
           <TabsContent value="video" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+             
+             <UploadLinksCard />
              
              {/* TECHNICAL SPECS VIDEO */}
              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1591,6 +1643,8 @@ export default function App() {
           {/* 4. DRONE TAB */}
           <TabsContent value="drone" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
              
+             <UploadLinksCard />
+             
              {/* DRONE FLIGHT PLANNER */}
              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card className="bg-zinc-900 border-zinc-800 col-span-1 md:col-span-2">
@@ -1675,6 +1729,7 @@ export default function App() {
 
           {/* 5. SOCIAL & MOTION TAB */}
           <TabsContent value="smm" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <UploadLinksCard />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card className="bg-zinc-900 border-zinc-800">
                 <CardHeader>
@@ -1751,6 +1806,7 @@ export default function App() {
 
           {/* 6. CHECKLIST TAB */}
           <TabsContent value="checklist" className="space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <UploadLinksCard />
             <div className="grid grid-cols-1 gap-6">
               <Card className="bg-zinc-900 border-zinc-800">
                 <CardHeader>
