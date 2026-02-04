@@ -413,10 +413,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "It's showtime / doors are open."
       },
       {
+        time: "18:30",
+        format: "STORY",
+        capture: "Wristband macro, signage, wayfinding, map boards.",
+        caption: "Welcome to The Freakyard."
+      },
+      {
         time: "19:00",
         format: "STORY",
         capture: "The Freakyard wide. Entry mood, skyline, first movement.",
         caption: "The Freakyard."
+      },
+      {
+        time: "19:30",
+        format: "STORY",
+        capture: "Stage build energy. Lighting test, sound check, crew in motion.",
+        caption: "Build to first drop."
       },
       {
         time: "20:30",
@@ -425,10 +437,28 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "People of Freaks of Nature."
       },
       {
+        time: "21:00",
+        format: "STORY",
+        capture: "Downtown social anchor. Seating, chill zones, small moments.",
+        caption: "Downtown."
+      },
+      {
+        time: "22:00",
+        format: "STORY",
+        capture: "Mainstage wide with lighting shift and crowd wave.",
+        caption: "MAINSTAGE."
+      },
+      {
         time: "22:30",
         format: "SOCIAL POST",
         capture: "Underground wide + crowd density.",
         caption: "Underground."
+      },
+      {
+        time: "23:30",
+        format: "STORY",
+        capture: "House of Freaks details. Costumes, textures, close interactions.",
+        caption: "HOUSE OF FREAKS."
       },
       {
         time: "01:15",
@@ -443,10 +473,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "Reel video."
       },
       {
+        time: "02:45",
+        format: "STORY",
+        capture: "Crowd peak. Hands, lights, silhouettes.",
+        caption: "Night pulse."
+      },
+      {
         time: "04:00",
         format: "SOCIAL POST",
         capture: "Close-out. Empty stages, exit lighting, final reactions.",
         caption: "Thank you post."
+      },
+      {
+        time: "04:15",
+        format: "STORY",
+        capture: "Exit flow. Transport, walk-out, sunrise hint.",
+        caption: "See you tomorrow."
       }
     ]
   },
@@ -460,16 +502,34 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "WEEKEND 1 - DAY 1."
       },
       {
+        time: "15:00",
+        format: "STORY",
+        capture: "Quick recap montage from Day 1. Simple phone cuts.",
+        caption: "Weekend 1 continues tonight."
+      },
+      {
         time: "17:30",
         format: "STORY",
         capture: "Doors open. Entry flow + wristbands.",
         caption: "It's showtime / doors are open."
       },
       {
+        time: "18:30",
+        format: "STORY",
+        capture: "Lineup boards, map, stage signage. Fast pan.",
+        caption: "Plan your route."
+      },
+      {
         time: "19:00",
         format: "SOCIAL POST",
         capture: "Mainstage wide + drop moment.",
         caption: "MAINSTAGE."
+      },
+      {
+        time: "20:00",
+        format: "STORY",
+        capture: "Underground queue or entrance. Movement, anticipation.",
+        caption: "Underground."
       },
       {
         time: "21:00",
@@ -484,16 +544,34 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "VIP BOXES (EACH BOX)."
       },
       {
+        time: "23:00",
+        format: "STORY",
+        capture: "Downtown night. Social anchor, resting, gathering.",
+        caption: "Downtown."
+      },
+      {
         time: "00:30",
         format: "SOCIAL POST",
         capture: "House of Freaks mood + close-up interactions.",
         caption: "HOUSE OF FREAKS."
       },
       {
+        time: "01:30",
+        format: "STORY",
+        capture: "Merch, costumes, detail textures. Quick macro shots.",
+        caption: "Details."
+      },
+      {
         time: "03:00",
         format: "SOCIAL POST",
         capture: "Closing reactions + exit flow.",
         caption: "Thank you post."
+      },
+      {
+        time: "03:30",
+        format: "STORY",
+        capture: "Exit flow. Short goodbye clips, calm walk-out.",
+        caption: "See you tomorrow."
       }
     ]
   },
@@ -507,10 +585,28 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "WEEKEND 1."
       },
       {
+        time: "15:00",
+        format: "STORY",
+        capture: "Weekend 2 teaser. Quick cuts from W1 + empty venue reset.",
+        caption: "Weekend 2."
+      },
+      {
         time: "18:00",
         format: "STORY",
         capture: "The Freakyard wide. Entry mood + return energy.",
         caption: "The Freakyard."
+      },
+      {
+        time: "18:30",
+        format: "STORY",
+        capture: "Wristband close-ups + gate flow. Easy handheld.",
+        caption: "Doors open."
+      },
+      {
+        time: "19:00",
+        format: "STORY",
+        capture: "Downtown or wayfinding. Simple establishing sweep.",
+        caption: "Downtown."
       },
       {
         time: "20:30",
@@ -519,10 +615,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "People of Freaks of Nature."
       },
       {
+        time: "21:30",
+        format: "STORY",
+        capture: "Mainstage wide. Crowd scale, lighting, hands.",
+        caption: "MAINSTAGE."
+      },
+      {
         time: "22:30",
         format: "SOCIAL POST",
         capture: "Underground or House of Freaks. Choose the strongest moment.",
         caption: "UNDERGROUND / HOUSE OF FREAKS."
+      },
+      {
+        time: "23:30",
+        format: "STORY",
+        capture: "VIP BOXES (EACH BOX). Quick ambience, service moments.",
+        caption: "VIP BOXES (EACH BOX)."
       },
       {
         time: "01:15",
@@ -535,6 +643,12 @@ const SOCIAL_RUN_OF_SHOW = [
         format: "REEL",
         capture: "Reel video. Drops, crowd reactions, lighting shifts.",
         caption: "Reel video."
+      },
+      {
+        time: "03:00",
+        format: "STORY",
+        capture: "Crowd peak. Lasers, silhouettes, motion blur.",
+        caption: "Night pulse."
       },
       {
         time: "04:00",
@@ -554,10 +668,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "WEEKEND 2 - DAY 1."
       },
       {
+        time: "15:00",
+        format: "STORY",
+        capture: "Final night reminder. Empty venue reset + prep shots.",
+        caption: "Final night."
+      },
+      {
         time: "17:30",
         format: "STORY",
         capture: "Doors open. Entry flow + wristbands.",
         caption: "It's showtime / doors are open."
+      },
+      {
+        time: "18:30",
+        format: "STORY",
+        capture: "Lineup boards + entry energy. Quick handheld.",
+        caption: "Plan your route."
       },
       {
         time: "20:00",
@@ -566,10 +692,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "MAINSTAGE."
       },
       {
+        time: "21:00",
+        format: "STORY",
+        capture: "Downtown night flow. Social anchor, refresh points.",
+        caption: "Downtown."
+      },
+      {
         time: "22:00",
         format: "SOCIAL POST",
         capture: "Underground wide + crowd density.",
         caption: "UNDERGROUND."
+      },
+      {
+        time: "23:00",
+        format: "STORY",
+        capture: "VIP BOXES (EACH BOX) ambience. Calm, premium moments.",
+        caption: "VIP BOXES (EACH BOX)."
       },
       {
         time: "00:30",
@@ -578,10 +716,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "HOUSE OF FREAKS."
       },
       {
+        time: "01:30",
+        format: "STORY",
+        capture: "Crowd peak + stage lights. Quick 10-15s clips.",
+        caption: "Last call."
+      },
+      {
         time: "02:00",
         format: "REEL",
         capture: "Final Closing Ceremony moments.",
         caption: "The Final Closing Ceremony."
+      },
+      {
+        time: "03:00",
+        format: "STORY",
+        capture: "Exit flow. Slow fade, last lights, empty lanes.",
+        caption: "Goodnight."
       },
       {
         time: "04:00",
@@ -601,6 +751,18 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "Best of Festival Collection (Top 50 All-time)."
       },
       {
+        time: "14:00",
+        format: "STORY",
+        capture: "UGC roundup. Repost real attendee clips.",
+        caption: "Find yourself in the crowd."
+      },
+      {
+        time: "18:00",
+        format: "SOCIAL POST",
+        capture: "People of Freakyard gallery. Faces, outfits, textures.",
+        caption: "People of Freaks of Nature."
+      },
+      {
         time: "20:00",
         format: "SOCIAL POST",
         capture: "Main aftermovie release.",
@@ -611,6 +773,12 @@ const SOCIAL_RUN_OF_SHOW = [
         format: "SOCIAL POST",
         capture: "Per-stage aftermovies.",
         caption: "Per-stage aftermovies: 1-2 min each stage."
+      },
+      {
+        time: "21:00",
+        format: "SOCIAL POST",
+        capture: "Artist recap drops schedule.",
+        caption: "Artist recap drops."
       }
     ]
   }
