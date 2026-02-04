@@ -5,6 +5,7 @@ import { ScheduleTimeline } from "./components/briefs/ScheduleTimeline";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { Checkbox } from "./components/ui/checkbox";
 import { Badge } from "./components/ui/badge";
+import { FormEvent, useEffect, useState } from "react";
 import { 
   Camera, Clapperboard, Video, Plane, Share2, CheckSquare, 
   Info, ShieldAlert, Zap, Skull, Radio, Clock, Fingerprint, 
@@ -374,7 +375,93 @@ const VIDEO_CHECKLIST_ITEMS = [
   "B-roll library: atmosphere, infrastructure, branding, crowd."
 ];
 
+const ACCESS_PASSWORD = "freaksinthedark";
+const ACCESS_KEY = "freaks-of-nature-access";
+
+const SPONSOR_CAPTURE_CHECKLIST = {
+  video: [
+    "Establishing shots of integration area",
+    "Wide crowd context",
+    "Close-up detail shots",
+    "Night + lighting conditions",
+    "Natural human interaction",
+    "At least one transition shot usable for edits"
+  ],
+  photo: [
+    "Wide environmental shots",
+    "Medium interaction shots",
+    "Detail/texture shots",
+    "One clean shot usable as website header",
+    "One abstract shot usable as background"
+  ],
+  general: [
+    "Branding visible but not dominant",
+    "Matches Freakyard visual language",
+    "No posed or promotional behavior",
+    "Safe for website + press usage"
+  ]
+};
+
 export default function App() {
+  const [isAuthed, setIsAuthed] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const stored = window.localStorage.getItem(ACCESS_KEY);
+    if (stored === "true") {
+      setIsAuthed(true);
+    }
+  }, []);
+
+  const handleAccessSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    if (passwordInput === ACCESS_PASSWORD) {
+      window.localStorage.setItem(ACCESS_KEY, "true");
+      setIsAuthed(true);
+      setPasswordError("");
+    } else {
+      setPasswordError("Invalid password.");
+    }
+  };
+
+  if (!isAuthed) {
+    return (
+      <div className="min-h-screen bg-black text-zinc-100 font-sans flex items-center justify-center px-4">
+        <div className="w-full max-w-md bg-zinc-950/80 border border-zinc-800 rounded-2xl p-8 shadow-2xl">
+          <div className="space-y-3 text-center">
+            <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Restricted Access</div>
+            <h1 className="text-2xl font-black uppercase text-white">Freaks of Nature</h1>
+            <p className="text-sm text-zinc-400">Enter the access password to continue.</p>
+          </div>
+          <form onSubmit={handleAccessSubmit} className="mt-6 space-y-4">
+            <div className="space-y-2">
+              <label className="text-xs uppercase tracking-[0.3em] text-zinc-500">Password</label>
+              <input
+                type="password"
+                value={passwordInput}
+                onChange={(event) => setPasswordInput(event.target.value)}
+                className="w-full rounded-lg bg-black/60 border border-zinc-800 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#FFBF00]/60"
+                placeholder="••••••••••••"
+                autoFocus
+              />
+              {passwordError ? (
+                <div className="text-xs text-red-400">{passwordError}</div>
+              ) : null}
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-[#FFBF00] text-black font-bold uppercase text-xs tracking-wider py-3 rounded-lg hover:bg-[#FFBF00]/90 transition-colors"
+            >
+              Enter
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-black text-zinc-100 font-sans selection:bg-[#FFBF00]/50 selection:text-black overflow-x-hidden">
       
@@ -550,6 +637,282 @@ export default function App() {
                </div>
             </div>
 
+            {/* PARTNER INTEGRATIONS */}
+            <div className="border border-zinc-800 bg-zinc-950/50 p-8 space-y-8">
+              <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-white">Partner Integrations — Content Guidelines</h3>
+                <p className="text-sm text-zinc-400">
+                  Internal brief aligned to <span className="text-[#FFBF00] font-bold">Freakyard Episode 7</span> and <span className="text-white font-bold">The Freakyard</span>. Use existing space names (Mainstage, Underground, House of Freaks, VIP - GENERAL, VIP BOXES (EACH BOX)). Partner presence is supporting, not featured.
+                </p>
+              </div>
+
+              <div className="space-y-8">
+                {/* ENERGIA */}
+                <div className="bg-black/40 border border-zinc-800/60 rounded-lg p-6 space-y-6">
+                  <h4 className="text-xl font-bold text-[#FFBF00]">ENERGIA</h4>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Integration Context</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Provides generators powering the site.</li>
+                      <li>Provides tents across the venue.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Website Placement</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Mission → The Freakyard — Supporting content block (inline media).</li>
+                      <li>Mission → Stages (MAINSTAGE / UNDERGROUND / HOUSE OF FREAKS) — Background visual.</li>
+                      <li>Photo → Editorial &amp; Stage — Gallery.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Visual Direction</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Focus on infrastructure, scale, reliability.</li>
+                      <li>Generators, cabling, tents in use.</li>
+                      <li>Shots during build, dusk, night.</li>
+                      <li>Human moments underneath tents.</li>
+                      <li>Energy as continuity, not hype.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Show Day Capture</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Generators in use with visible load.</li>
+                      <li>Cabling runs and power distribution in context.</li>
+                      <li>Tents active with crew and guests underneath.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Video Content (Required)</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Hero video: 60 seconds.</li>
+                      <li>Cutdowns supported.</li>
+                      <li>Moments: generators in use, cabling runs, tents in live operation, dusk to night transitions.</li>
+                      <li>Presence shows as infrastructure, space, and continuity (never ads).</li>
+                      <li>Do not show: forced product shots, crowd posing.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Photo Content (Required)</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Environmental shots of tents and generator zones.</li>
+                      <li>Detail shots: cabling, panels, connectors, signage.</li>
+                      <li>Human interaction: crew under tents, guests using covered areas.</li>
+                      <li>Used for website galleries, page backgrounds, and supporting visuals under text.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Content Capture Checklist</div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">VIDEO</div>
+                        {SPONSOR_CAPTURE_CHECKLIST.video.map((item, index) => (
+                          <CheckItem key={`energia-video-${index}`} text={item} />
+                        ))}
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">PHOTO</div>
+                        {SPONSOR_CAPTURE_CHECKLIST.photo.map((item, index) => (
+                          <CheckItem key={`energia-photo-${index}`} text={item} />
+                        ))}
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">GENERAL</div>
+                        {SPONSOR_CAPTURE_CHECKLIST.general.map((item, index) => (
+                          <CheckItem key={`energia-general-${index}`} text={item} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SUNCOLA */}
+                <div className="bg-black/40 border border-zinc-800/60 rounded-lg p-6 space-y-6">
+                  <h4 className="text-xl font-bold text-[#FFBF00]">SUNCOLA</h4>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Integration Context</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Dedicated space in Downtown.</li>
+                      <li>Activations.</li>
+                      <li>Large screen.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Website Placement</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Mission → The Freakyard — Supporting content block (inline media).</li>
+                      <li>Photo → Team Tarik: The Engagement Ops — Gallery.</li>
+                      <li>Photo → SPONSOR ACTIVATIONS — Gallery.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Visual Direction</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Downtown as a social anchor.</li>
+                      <li>Activation moments in context.</li>
+                      <li>Big screen with crowd reacting, resting, gathering.</li>
+                      <li>Bright but grounded. Social, not staged.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Show Day Capture</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Downtown space active with natural flow.</li>
+                      <li>Activations mid-use with real interaction.</li>
+                      <li>Large screen in wide context and close detail.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Video Content (Required)</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Hero video: 60 seconds.</li>
+                      <li>Cutdowns supported.</li>
+                      <li>Moments: Downtown flow, activation use, screen context, social anchors.</li>
+                      <li>Presence shows as space and experience (never ads).</li>
+                      <li>Do not show: forced product shots, crowd posing.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Photo Content (Required)</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Environmental shots of Downtown and activation footprint.</li>
+                      <li>Detail shots: screen, signage, activation elements.</li>
+                      <li>Human interaction: resting, gathering, reacting.</li>
+                      <li>Used for website galleries, page backgrounds, and supporting visuals under text.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Content Capture Checklist</div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">VIDEO</div>
+                        {SPONSOR_CAPTURE_CHECKLIST.video.map((item, index) => (
+                          <CheckItem key={`suncola-video-${index}`} text={item} />
+                        ))}
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">PHOTO</div>
+                        {SPONSOR_CAPTURE_CHECKLIST.photo.map((item, index) => (
+                          <CheckItem key={`suncola-photo-${index}`} text={item} />
+                        ))}
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">GENERAL</div>
+                        {SPONSOR_CAPTURE_CHECKLIST.general.map((item, index) => (
+                          <CheckItem key={`suncola-general-${index}`} text={item} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* PEPSI GROUP */}
+                <div className="bg-black/40 border border-zinc-800/60 rounded-lg p-6 space-y-6">
+                  <h4 className="text-xl font-bold text-[#FFBF00]">PEPSI GROUP</h4>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Integration Context</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Pepsi, Aquafina, Heineken under one group.</li>
+                      <li>Fridges across the venue.</li>
+                      <li>Fridges inside VIP boxes.</li>
+                      <li>Presence across Downtown.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Website Placement</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Photo → VIP - GENERAL — Gallery.</li>
+                      <li>Photo → VIP BOXES (EACH BOX) — Gallery.</li>
+                      <li>Photo → SPONSOR ACTIVATIONS — Supporting content block (inline media).</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Visual Direction</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Distribution and accessibility.</li>
+                      <li>Fridges in real use.</li>
+                      <li>VIP boxes moments.</li>
+                      <li>Downtown refresh moments.</li>
+                      <li>Aquafina moments feel lighter and calmer.</li>
+                      <li>Heineken presence as branding/environment only (no consumption focus).</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Show Day Capture</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Fridges in real use across the venue.</li>
+                      <li>VIP box service moments with fridges in frame.</li>
+                      <li>Downtown refresh moments with natural flow.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Video Content (Required)</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Hero video: 60 seconds.</li>
+                      <li>Cutdowns supported.</li>
+                      <li>Moments: fridge access in real use, VIP box service, Downtown refresh flow.</li>
+                      <li>Presence shows as infrastructure and availability (never ads).</li>
+                      <li>Do not show: forced product shots, crowd posing.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Photo Content (Required)</div>
+                    <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
+                      <li>Environmental shots: fridges in venue and VIP boxes.</li>
+                      <li>Detail shots: fridge surfaces, placement, lighting.</li>
+                      <li>Human interaction: natural refresh moments.</li>
+                      <li>Used for website galleries, page backgrounds, and supporting visuals under text.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">Content Capture Checklist</div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">VIDEO</div>
+                        {SPONSOR_CAPTURE_CHECKLIST.video.map((item, index) => (
+                          <CheckItem key={`pepsi-video-${index}`} text={item} />
+                        ))}
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">PHOTO</div>
+                        {SPONSOR_CAPTURE_CHECKLIST.photo.map((item, index) => (
+                          <CheckItem key={`pepsi-photo-${index}`} text={item} />
+                        ))}
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs uppercase tracking-[0.3em] text-zinc-500">GENERAL</div>
+                        {SPONSOR_CAPTURE_CHECKLIST.general.map((item, index) => (
+                          <CheckItem key={`pepsi-general-${index}`} text={item} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* TEAM CONTACTS */}
             <div className="border border-zinc-800 bg-zinc-950/50 p-8">
                <h3 className="text-xl font-bold text-zinc-100 mb-6 flex items-center gap-2">
@@ -655,7 +1018,7 @@ export default function App() {
                 <Badge variant="outline" className="border-[#FFBF00] text-[#FFBF00]">PHASE 2: WEEKEND 1 (FEB 5-6)</Badge>
                    <BriefSection 
                      mood="toxic"
-                     title="Team Tarik: The Memzo Ops"
+                     title="Team Tarik: The Engagement Ops"
                      role="Engagement Unit"
                      description="Capture. Connect. Upload. Every face matters."
                    responsibilities={[
@@ -665,7 +1028,7 @@ export default function App() {
                      "HYPE THEM UP. You are not just a photographer, you are an entertainer."
                    ]}
                    deliverables={[
-                     "Continuous upload stream to Memzo.ai.",
+                     "Continuous upload stream to the live gallery.",
                      "Min 500+ usable attendee portraits per day.",
                      "Zero blurry shots. High shutter speed is your friend."
                    ]}
@@ -1034,7 +1397,7 @@ export default function App() {
         {/* FOOTER */}
         <footer className="mt-20 border-t border-zinc-900 pt-8 text-center text-zinc-600 font-mono text-xs uppercase tracking-widest">
            <p>Freaks of Nature Production | Confidential | Do not distribute</p>
-           <p className="mt-2 text-zinc-800">System v7.0.1 // Connected to Memzo.ai</p>
+           <p className="mt-2 text-zinc-800">System v7.0.1 // Live</p>
         </footer>
 
       </div>
