@@ -7,10 +7,10 @@ import { Checkbox } from "./components/ui/checkbox";
 import { Badge } from "./components/ui/badge";
 import { FormEvent, useEffect, useState } from "react";
 import { 
-  Camera, Clapperboard, Video, Plane, Share2, CheckSquare, 
+  Camera, Clapperboard, Video, Share2, CheckSquare, 
   Info, ShieldAlert, Zap, Skull, Radio, Clock, Fingerprint, 
-  Eye, Aperture, AlertOctagon, Calendar, BatteryCharging, HardDrive, MapPin,
-  Settings, Layers, Music, Wind, AlertTriangle, FileDigit, LayoutDashboard, Grid3X3
+  Eye, AlertOctagon, Calendar, BatteryCharging, HardDrive, MapPin,
+  Settings, LayoutDashboard, Grid3X3
 } from "lucide-react";
 import { MasterPlanBoard } from "./components/briefs/MasterPlanBoard";
 import { ProductionMatrix } from "./components/briefs/ProductionMatrix";
@@ -375,6 +375,77 @@ const VIDEO_CHECKLIST_ITEMS = [
   "B-roll library: atmosphere, infrastructure, branding, crowd."
 ];
 
+const VIDEO_CHECKLIST_SECTIONS = [
+  {
+    title: "SITE / OPENING / BUILD",
+    items: [
+      "Site establishing shots (empty)",
+      "Build timelapses (day + night)",
+      "Crew in motion (setup, tests, checks)",
+      "Entry gates opening",
+      "Wayfinding and signage in motion",
+      "First crowd flow"
+    ]
+  },
+  {
+    title: "STAGES (MAIN / UNDERGROUND / HOUSE OF FREAKS)",
+    items: [
+      "Wide crowd + stage scale",
+      "Drop moments + crowd reaction",
+      "DJ hands / controls",
+      "Lighting and laser sweeps",
+      "POV swaps (stage to crowd)",
+      "Transition shots between stages"
+    ]
+  },
+  {
+    title: "CROWD / ENERGY / PEOPLE",
+    items: [
+      "Wide crowd energy",
+      "Mid shots of groups",
+      "Close reactions and faces",
+      "Movement shots (walking, dancing, running)",
+      "Costume / texture details",
+      "Natural interactions (no posed clips)"
+    ]
+  },
+  {
+    title: "DOWNTOWN + VIP",
+    items: [
+      "Downtown as social anchor",
+      "Resting, gathering, regrouping moments",
+      "VIP - GENERAL ambience",
+      "VIP BOXES (EACH BOX) service moments",
+      "Premium lighting and calm moments"
+    ]
+  },
+  {
+    title: "SPONSOR INTEGRATIONS (VIDEO)",
+    items: [
+      "ENERGIA: generators in use, cabling runs, tents in operation",
+      "ENERGIA: build + dusk + night infrastructure moments",
+      "SUNCOLA: Downtown space in use",
+      "SUNCOLA: activations + large screen in context",
+      "PEPSI GROUP: fridges across venue (real use)",
+      "PEPSI GROUP: fridges inside VIP boxes",
+      "PEPSI GROUP: Downtown refresh moments",
+      "Aquafina: lighter, calmer moments",
+      "Heineken: branding/environment only (no consumption focus)"
+    ]
+  },
+  {
+    title: "DELIVERABLES / FORMATS",
+    items: [
+      "Hero video: 60s with clear arc",
+      "Reels: 9:16 cutdowns",
+      "Daily recap timeline coverage",
+      "Per-stage aftermovie coverage",
+      "B-roll library (atmosphere + infrastructure)",
+      "At least one clean transition shot per sequence"
+    ]
+  }
+];
+
 const ACCESS_PASSWORD = "freaksinthedark";
 const ACCESS_KEY = "freaks-of-nature-access";
 
@@ -415,14 +486,14 @@ const SOCIAL_RUN_OF_SHOW = [
       {
         time: "18:30",
         format: "STORY",
-        capture: "Wristband macro, signage, wayfinding, map boards.",
+        capture: "Story collage: wristband macro, signage, wayfinding, map boards.",
         caption: "Welcome to The Freakyard."
       },
       {
         time: "19:00",
         format: "STORY",
         capture: "The Freakyard wide. Entry mood, skyline, first movement.",
-        caption: "The Freakyard."
+        caption: "The Freakyard ignites."
       },
       {
         time: "19:30",
@@ -431,16 +502,28 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "Build to first drop."
       },
       {
+        time: "20:00",
+        format: "STORY",
+        capture: "Mainstage ignition. First drop, light sweep, crowd roar.",
+        caption: "MAINSTAGE."
+      },
+      {
         time: "20:30",
         format: "SOCIAL POST",
         capture: "People portraits + crowd texture.",
-        caption: "People of Freaks of Nature."
+        caption: "People of Freaks of Nature (photo collage)."
       },
       {
         time: "21:00",
         format: "STORY",
         capture: "Downtown social anchor. Seating, chill zones, small moments.",
         caption: "Downtown."
+      },
+      {
+        time: "21:30",
+        format: "STORY",
+        capture: "Underground entry surge. First bass, packed floor.",
+        caption: "UNDERGROUND."
       },
       {
         time: "22:00",
@@ -452,7 +535,7 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "22:30",
         format: "SOCIAL POST",
         capture: "Underground wide + crowd density.",
-        caption: "Underground."
+        caption: "UNDERGROUND (photo collage)."
       },
       {
         time: "23:30",
@@ -461,16 +544,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "HOUSE OF FREAKS."
       },
       {
+        time: "00:15",
+        format: "STORY",
+        capture: "All stages pulse. Fast cuts: Mainstage > Underground > HoF.",
+        caption: "The Freakyard at full power."
+      },
+      {
         time: "01:15",
         format: "SOCIAL POST",
         capture: "UGC pull. Real attendee angle.",
-        caption: "User generated post."
+        caption: "User generated post (photo collage)."
       },
       {
         time: "02:00",
         format: "REEL",
-        capture: "Reel video. Drops, crowd reactions, lighting shifts.",
-        caption: "Reel video."
+        capture: "Daily highlights reel (Day 1). Drops, crowd reactions, lighting shifts.",
+        caption: "Daily highlights reel — Day 1."
       },
       {
         time: "02:45",
@@ -482,7 +571,7 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "04:00",
         format: "SOCIAL POST",
         capture: "Close-out. Empty stages, exit lighting, final reactions.",
-        caption: "Thank you post."
+        caption: "Thank you post (photo collage)."
       },
       {
         time: "04:15",
@@ -499,7 +588,7 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "13:00",
         format: "SOCIAL POST",
         capture: "Recap selects from Day 1. Hero moments only.",
-        caption: "WEEKEND 1 - DAY 1."
+        caption: "WEEKEND 1 - DAY 1 (photo collage)."
       },
       {
         time: "15:00",
@@ -516,20 +605,20 @@ const SOCIAL_RUN_OF_SHOW = [
       {
         time: "18:30",
         format: "STORY",
-        capture: "Lineup boards, map, stage signage. Fast pan.",
+        capture: "Story collage: lineup boards, map, stage signage.",
         caption: "Plan your route."
       },
       {
         time: "19:00",
         format: "SOCIAL POST",
         capture: "Mainstage wide + drop moment.",
-        caption: "MAINSTAGE."
+        caption: "MAINSTAGE (photo collage)."
       },
       {
         time: "20:00",
         format: "STORY",
         capture: "Underground queue or entrance. Movement, anticipation.",
-        caption: "Underground."
+        caption: "UNDERGROUND."
       },
       {
         time: "21:00",
@@ -538,10 +627,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "VIP - GENERAL."
       },
       {
+        time: "21:30",
+        format: "STORY",
+        capture: "Mainstage peak. Crowd wave, lights in sync.",
+        caption: "MAINSTAGE."
+      },
+      {
         time: "22:00",
         format: "SOCIAL POST",
         capture: "VIP BOXES (EACH BOX) service moment.",
-        caption: "VIP BOXES (EACH BOX)."
+        caption: "VIP BOXES (EACH BOX) (photo collage)."
+      },
+      {
+        time: "22:30",
+        format: "SOCIAL POST",
+        capture: "Underground drop moment. Tight crowd, heavy bass.",
+        caption: "UNDERGROUND (photo collage)."
       },
       {
         time: "23:00",
@@ -550,10 +651,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "Downtown."
       },
       {
+        time: "23:30",
+        format: "STORY",
+        capture: "House of Freaks flare. Costumes, light, movement.",
+        caption: "HOUSE OF FREAKS."
+      },
+      {
+        time: "00:10",
+        format: "STORY",
+        capture: "Stage sweep: Mainstage > Underground > House of Freaks.",
+        caption: "All stages at full power."
+      },
+      {
         time: "00:30",
         format: "SOCIAL POST",
         capture: "House of Freaks mood + close-up interactions.",
-        caption: "HOUSE OF FREAKS."
+        caption: "HOUSE OF FREAKS (photo collage)."
       },
       {
         time: "01:30",
@@ -562,10 +675,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "Details."
       },
       {
+        time: "02:30",
+        format: "REEL",
+        capture: "Daily highlights reel (Day 2).",
+        caption: "Daily highlights reel — Day 2."
+      },
+      {
         time: "03:00",
         format: "SOCIAL POST",
         capture: "Closing reactions + exit flow.",
-        caption: "Thank you post."
+        caption: "Thank you post (photo collage)."
+      },
+      {
+        time: "03:45",
+        format: "REEL",
+        capture: "Aftermovie reel (Weekend 1: Days 1-2).",
+        caption: "Aftermovie reel — Weekend 1."
       },
       {
         time: "03:30",
@@ -582,7 +707,7 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "13:00",
         format: "SOCIAL POST",
         capture: "Recap selects from Weekend 1. Missing angles + highlights.",
-        caption: "WEEKEND 1."
+        caption: "WEEKEND 1 (photo collage)."
       },
       {
         time: "15:00",
@@ -599,7 +724,7 @@ const SOCIAL_RUN_OF_SHOW = [
       {
         time: "18:30",
         format: "STORY",
-        capture: "Wristband close-ups + gate flow. Easy handheld.",
+        capture: "Story collage: wristband close-ups + gate flow.",
         caption: "Doors open."
       },
       {
@@ -612,7 +737,7 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "20:30",
         format: "SOCIAL POST",
         capture: "People portraits + crowd texture.",
-        caption: "People of Freaks of Nature."
+        caption: "People of Freaks of Nature (photo collage)."
       },
       {
         time: "21:30",
@@ -621,10 +746,16 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "MAINSTAGE."
       },
       {
-        time: "22:30",
+        time: "22:00",
+        format: "STORY",
+        capture: "Underground surge. Deep lights, packed floor.",
+        caption: "UNDERGROUND."
+      },
+      {
+        time: "22:45",
         format: "SOCIAL POST",
-        capture: "Underground or House of Freaks. Choose the strongest moment.",
-        caption: "UNDERGROUND / HOUSE OF FREAKS."
+        capture: "House of Freaks close-ups. Costumes, textures, reactions.",
+        caption: "HOUSE OF FREAKS (photo collage)."
       },
       {
         time: "23:30",
@@ -633,16 +764,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "VIP BOXES (EACH BOX)."
       },
       {
+        time: "00:10",
+        format: "STORY",
+        capture: "Stage sweep: Mainstage > Underground > House of Freaks.",
+        caption: "All stages at full power."
+      },
+      {
         time: "01:15",
         format: "SOCIAL POST",
         capture: "UGC pull. Real attendee angle.",
-        caption: "User generated post."
+        caption: "User generated post (photo collage)."
       },
       {
         time: "02:00",
         format: "REEL",
-        capture: "Reel video. Drops, crowd reactions, lighting shifts.",
-        caption: "Reel video."
+        capture: "Daily highlights reel (Day 3). Drops, crowd reactions, lighting shifts.",
+        caption: "Daily highlights reel — Day 3."
       },
       {
         time: "03:00",
@@ -654,7 +791,7 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "04:00",
         format: "SOCIAL POST",
         capture: "Close-out. Empty stages, exit lighting, final reactions.",
-        caption: "Thank you post."
+        caption: "Thank you post (photo collage)."
       }
     ]
   },
@@ -665,7 +802,7 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "13:00",
         format: "SOCIAL POST",
         capture: "Recap selects from Weekend 2 - Day 1.",
-        caption: "WEEKEND 2 - DAY 1."
+        caption: "WEEKEND 2 - DAY 1 (photo collage)."
       },
       {
         time: "15:00",
@@ -682,14 +819,14 @@ const SOCIAL_RUN_OF_SHOW = [
       {
         time: "18:30",
         format: "STORY",
-        capture: "Lineup boards + entry energy. Quick handheld.",
+        capture: "Story collage: lineup boards + entry energy.",
         caption: "Plan your route."
       },
       {
         time: "20:00",
         format: "SOCIAL POST",
         capture: "Mainstage wide + peak moment.",
-        caption: "MAINSTAGE."
+        caption: "MAINSTAGE (photo collage)."
       },
       {
         time: "21:00",
@@ -698,10 +835,16 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "Downtown."
       },
       {
+        time: "21:30",
+        format: "STORY",
+        capture: "Mainstage peak. Lasers, crowd wave, skyline glow.",
+        caption: "MAINSTAGE."
+      },
+      {
         time: "22:00",
         format: "SOCIAL POST",
         capture: "Underground wide + crowd density.",
-        caption: "UNDERGROUND."
+        caption: "UNDERGROUND (photo collage)."
       },
       {
         time: "23:00",
@@ -710,10 +853,22 @@ const SOCIAL_RUN_OF_SHOW = [
         caption: "VIP BOXES (EACH BOX)."
       },
       {
+        time: "23:30",
+        format: "STORY",
+        capture: "House of Freaks surge. Costumes + crowd movement.",
+        caption: "HOUSE OF FREAKS."
+      },
+      {
+        time: "00:10",
+        format: "STORY",
+        capture: "Stage sweep: Mainstage > Underground > House of Freaks.",
+        caption: "All stages at full power."
+      },
+      {
         time: "00:30",
         format: "SOCIAL POST",
         capture: "House of Freaks mood + close-up interactions.",
-        caption: "HOUSE OF FREAKS."
+        caption: "HOUSE OF FREAKS (photo collage)."
       },
       {
         time: "01:30",
@@ -724,8 +879,8 @@ const SOCIAL_RUN_OF_SHOW = [
       {
         time: "02:00",
         format: "REEL",
-        capture: "Final Closing Ceremony moments.",
-        caption: "The Final Closing Ceremony."
+        capture: "Daily highlights reel (Day 4). Final Closing Ceremony moments.",
+        caption: "Daily highlights reel — Day 4."
       },
       {
         time: "03:00",
@@ -737,7 +892,13 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "04:00",
         format: "SOCIAL POST",
         capture: "Closing reactions + exit flow.",
-        caption: "Thank you post."
+        caption: "Thank you post (photo collage)."
+      },
+      {
+        time: "04:30",
+        format: "REEL",
+        capture: "Aftermovie reel (Weekend 2: Days 3-4).",
+        caption: "Aftermovie reel — Weekend 2."
       }
     ]
   },
@@ -748,7 +909,7 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "12:00",
         format: "SOCIAL POST",
         capture: "Best selects across all days.",
-        caption: "Best of Festival Collection (Top 50 All-time)."
+        caption: "Best of Festival Collection (Top 50 All-time) (photo collage)."
       },
       {
         time: "14:00",
@@ -760,25 +921,25 @@ const SOCIAL_RUN_OF_SHOW = [
         time: "18:00",
         format: "SOCIAL POST",
         capture: "People of Freakyard gallery. Faces, outfits, textures.",
-        caption: "People of Freaks of Nature."
+        caption: "People of Freaks of Nature (photo collage)."
       },
       {
         time: "20:00",
-        format: "SOCIAL POST",
+        format: "REEL",
         capture: "Main aftermovie release.",
         caption: "Main aftermovie."
       },
       {
         time: "20:30",
-        format: "SOCIAL POST",
+        format: "REEL",
         capture: "Per-stage aftermovies.",
         caption: "Per-stage aftermovies: 1-2 min each stage."
       },
       {
         time: "21:00",
         format: "SOCIAL POST",
-        capture: "Artist recap drops schedule.",
-        caption: "Artist recap drops."
+        capture: "Artist recap drops schedule (graphic carousel).",
+        caption: "Artist recap drops (photo/graphic post)."
       }
     ]
   }
@@ -786,7 +947,7 @@ const SOCIAL_RUN_OF_SHOW = [
 
 const VIDEO_UPLOAD_LINKS = [
   {
-    label: "Video Upload Folder",
+    label: "Photos Folder",
     href: "https://drive.google.com/drive/folders/1xgV6OEawFORzIJvP-9d7HEB-hnBMhQON"
   },
   {
@@ -798,7 +959,7 @@ const VIDEO_UPLOAD_LINKS = [
 const UploadLinksCard = () => (
   <Card className="bg-zinc-900 border-zinc-800">
     <CardHeader>
-      <CardTitle className="text-[#FFBF00]">Upload Links</CardTitle>
+      <CardTitle className="text-[#FFBF00]">Folders</CardTitle>
     </CardHeader>
     <CardContent className="space-y-3">
       <p className="text-sm text-zinc-400">Use the correct folder for every delivery. Do not mix uploads.</p>
@@ -931,7 +1092,6 @@ export default function App() {
                 <TabTrigger value="overview" icon={<Info size={18} />} label="Mission" />
                 <TabTrigger value="photo" icon={<Camera size={18} />} label="Photo" />
                 <TabTrigger value="video" icon={<Video size={18} />} label="Video" />
-                <TabTrigger value="drone" icon={<Plane size={18} />} label="Drone" />
                 <TabTrigger value="smm" icon={<Share2 size={18} />} label="Socials" />
                 <TabTrigger value="checklist" icon={<CheckSquare size={18} />} label="Checklist" />
               </TabsList>
@@ -1116,52 +1276,15 @@ export default function App() {
           <TabsContent value="photo" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
              
              <UploadLinksCard />
-             
-             {/* PHOTOGRAPHY QUICK GUIDE */}
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <TechSpecCard 
-                  title="File Protocols" 
-                  icon={<FileDigit className="text-cyan-400" />}
-                  specs={[
-                    "Format: RAW + JPG (Fine)",
-                    "Color Space: sRGB (immediate social export)",
-                    "Keep a mirrored JPG folder for fast delivery"
-                  ]}
-                />
-                <TechSpecCard 
-                  title="Capture Rules" 
-                  icon={<Settings className="text-[#FFBF00]" />}
-                  specs={[
-                    "Fast glass: f/2.8 or faster mandatory",
-                    "No flash on stage unless authorized",
-                    "Flash only for crowd portraits (rear-curtain sync)",
-                    "Minimum shutter: 1/250 crowd, 1/500 stage"
-                  ]}
-                />
-                <TechSpecCard 
-                  title="Delivery Timing" 
-                  icon={<Clock className="text-pink-400" />}
-                  specs={[
-                    "Live gallery: continuous uploads",
-                    "Top 20 selects: within 2 hours of gates",
-                    "Full edited gallery: by 10:00 AM next day",
-                    "Best of Festival: Top 50 after final night"
-                  ]}
-                />
-             </div>
-
+              
              <Card className="bg-zinc-900 border-zinc-800">
                <CardHeader>
-                 <CardTitle className="text-[#FFBF00]">Shot Priority Stack (Easy Wins First)</CardTitle>
+                 <CardTitle className="text-cyan-400">Photography Coverage Checklist</CardTitle>
                </CardHeader>
-               <CardContent className="space-y-2">
-                 <ul className="text-sm text-zinc-300 list-disc pl-4 space-y-1">
-                   <li>Wide scale: Mainstage + crowd density.</li>
-                   <li>People portraits: energy, fashion, group shots.</li>
-                   <li>Stage moments: drops, confetti, silhouettes, hands.</li>
-                   <li>Downtown + House of Freaks: social anchor and details.</li>
-                   <li>VIP - GENERAL and VIP BOXES (EACH BOX) ambience.</li>
-                 </ul>
+               <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                 {PHOTO_CHECKLIST_SECTIONS.map((section, index) => (
+                   <CheckSection key={section.title + index} title={section.title} items={section.items} />
+                 ))}
                </CardContent>
              </Card>
 
@@ -1230,94 +1353,19 @@ export default function App() {
           <TabsContent value="video" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
              
              <UploadLinksCard />
-             
-             {/* TECHNICAL SPECS VIDEO */}
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <TechSpecCard 
-                  title="Recording Format" 
-                  icon={<FileDigit className="text-purple-400" />}
-                  specs={[
-                    "Res: 4K UHD (3840x2160)",
-                    "FPS: 60fps Base (Slow-mo ready)",
-                    "Codec: ProRes 422 or XAVC-S-I (High Bitrate)",
-                    "Log Profile: S-Log3 / V-Log mandatory"
-                  ]}
-                />
-                <TechSpecCard 
-                  title="Audio Sync" 
-                  icon={<Music className="text-pink-400" />}
-                  specs={[
-                    "Timecode Sync via Tentacle (if available).",
-                    "Scratch Audio: Always ON.",
-                    "Lavaliers for artist interviews.",
-                    "Soundboard feed recording: -12dB safety."
-                  ]}
-                />
-                <TechSpecCard 
-                   title="Delivery Specs"
-                   icon={<Layers className="text-indigo-400" />}
-                   specs={[
-                     "Reels: 1080x1920 (9:16) @ 30fps",
-                     "YouTube/TV: 3840x2160 (16:9) @ 24fps",
-                     "Clean Feed: No baked-in text/subs."
-                   ]}
-                />
-             </div>
 
-             {/* TIMELINE BREAKDOWN VIDEO */}
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <Card className="bg-zinc-900 border-l-4 border-l-[#FFBF00] border-zinc-800">
-                   <div className="p-4">
-                     <h4 className="font-bold text-[#FFBF00]">WEEKEND 1 STRATEGY</h4>
-                     <p className="text-sm text-zinc-400 mt-2">Focus on <span className="text-white">SCALE and ENERGY</span>. We need to show the world how big this is to sell out Weekend 2.</p>
-                   </div>
-                </Card>
-                <Card className="bg-zinc-900 border-l-4 border-l-cyan-500 border-zinc-800">
-                   <div className="p-4">
-                     <h4 className="font-bold text-cyan-400">WEEKEND 2 STRATEGY</h4>
-                     <p className="text-sm text-zinc-400 mt-2">Focus on <span className="text-white">EMOTION and COMMUNITY</span>. Interviews, hugs, close-ups. This is for the Aftermovie.</p>
-                   </div>
-                </Card>
-             </div>
+             <Card className="bg-zinc-900 border-zinc-800">
+               <CardHeader>
+                 <CardTitle className="text-purple-400">Video Coverage Checklist</CardTitle>
+               </CardHeader>
+               <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                 {VIDEO_CHECKLIST_SECTIONS.map((section, index) => (
+                   <CheckSection key={section.title + index} title={section.title} items={section.items} />
+                 ))}
+               </CardContent>
+             </Card>
 
-             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <BriefSection 
-                  mood="toxic"
-                  title="Team Relive (Set Prod)"
-                  role="Performance Capture"
-                  description="Documentation of the musical journey."
-                  responsibilities={[
-                    "Ales to coordinate Mic Cams (GoPros). Essential for that POV feel.",
-                    "Capture audio feed directly from soundboard (Redundancy recorder).",
-                    "Capture crowd reaction during drops. Turn the camera around!",
-                    "Get the 'DJ Hand' shots. Knobs twisting, faders sliding."
-                  ]}
-                  deliverables={[
-                    "5x Vertical Shorts (15-30s) per artist. RAPID turnaround.",
-                    "Full Set 4K Export (ProRes LT or equivalent).",
-                    "Separate audio tracks synced."
-                  ]}
-                />
-
-                <BriefSection 
-                  mood="cyber"
-                  title="Hero Cinematic Team"
-                  role="Storytellers"
-                  description="Making the movie. Emotional, slow-mo, epic."
-                  responsibilities={[
-                    "High frame rates (60/120fps) for slow motion.",
-                    "Gimbal work for smooth crowd movement.",
-                    "Timelapses of stage construction/crowd fill.",
-                    "Narrative shots: People entering -> Anticipation -> Madness -> Aftermath."
-                  ]}
-                  deliverables={[
-                    "DAILY AFTERMOVIE (60s). Must be ready by 8 AM.",
-                    "Vertical cuts of best moments for Reels.",
-                    "Raw selection for Motion Team."
-                  ]}
-                  notes="The Daily Aftermovie is our #1 marketing tool for ticket sales next day. It cannot be late."
-                />
-             </div>
+             <div className="hidden" aria-hidden="true" />
 
              <div className="mt-8">
                 <BriefSection
@@ -1345,25 +1393,7 @@ export default function App() {
                 />
              </div>
              
-             <div className="mt-8">
-                <BriefSection
-                  mood="neon"
-                  title="Detail Unit (House of Freaks)"
-                  role="Micro Moments"
-                  description="Smaller scope team focused on details and intimate moments, mostly in House of Freaks."
-                  responsibilities={[
-                    "Close-ups of decor, props, costumes, and textures.",
-                    "Short performance snippets (10-30s) for socials.",
-                    "Audience reactions in HoF — keep it tasteful and respectful.",
-                    "Ambient b-roll: lights, signage, hands, movement."
-                  ]}
-                  deliverables={[
-                    "Daily micro-reel pack (10-15 clips).",
-                    "Detail b-roll folder tagged by location.",
-                    "At least 3 HoF story-ready clips per hour."
-                  ]}
-                />
-             </div>
+             <div className="hidden" aria-hidden="true" />
 
              {/* PARTNER INTEGRATIONS */}
              <div className="border border-zinc-800 bg-zinc-950/50 p-8 space-y-8">
@@ -1640,134 +1670,9 @@ export default function App() {
              </div>
           </TabsContent>
 
-          {/* 4. DRONE TAB */}
-          <TabsContent value="drone" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-             
-             <UploadLinksCard />
-             
-             {/* DRONE FLIGHT PLANNER */}
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="bg-zinc-900 border-zinc-800 col-span-1 md:col-span-2">
-                   <CardHeader className="pb-2">
-                      <CardTitle className="text-yellow-400 flex items-center gap-2"><Wind /> Flight Manifest & Safety</CardTitle>
-                   </CardHeader>
-                   <CardContent className="space-y-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="p-3 bg-red-950/20 border border-red-900/50 rounded">
-                           <h5 className="text-red-500 font-bold flex items-center gap-2 text-xs uppercase tracking-wider"><AlertTriangle size={12}/> No Fly Zones</h5>
-                           <ul className="text-zinc-400 text-xs mt-2 space-y-1 list-disc pl-3">
-                              <li>Directly over mainstage crowd center (unless &gt;50m alt).</li>
-                              <li>Within 50m of active pyrotechnics.</li>
-                              <li>Backstage artist dressing rooms.</li>
-                           </ul>
-                        </div>
-                        <div className="p-3 bg-[#FFBF00]/20 border border-[#FFBF00]/50 rounded">
-                           <h5 className="text-[#FFBF00] font-bold flex items-center gap-2 text-xs uppercase tracking-wider"><CheckSquare size={12}/> Approved Corridors</h5>
-                           <ul className="text-zinc-400 text-xs mt-2 space-y-1 list-disc pl-3">
-                              <li>Main access road (entry shots).</li>
-                              <li>Perimeter of Mainstage (orbit shots).</li>
-                              <li>Vertical ascent from FOH tower.</li>
-                           </ul>
-                        </div>
-                      </div>
-                      
-                      <div className="border-t border-zinc-800 pt-4">
-                         <h5 className="text-zinc-100 font-bold text-sm mb-2">Key Shot List</h5>
-                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-zinc-400">
-                            <div className="bg-black/40 p-2 rounded border border-zinc-800 flex justify-between">
-                               <span>The Reveal (Low to High)</span> <Badge variant="secondary" className="text-[10px] h-5">Sunset</Badge>
-                            </div>
-                            <div className="bg-black/40 p-2 rounded border border-zinc-800 flex justify-between">
-                               <span>The Chase (Follow Artist Car)</span> <Badge variant="secondary" className="text-[10px] h-5">Arrival</Badge>
-                            </div>
-                            <div className="bg-black/40 p-2 rounded border border-zinc-800 flex justify-between">
-                               <span>God's Eye (Top Down)</span> <Badge variant="secondary" className="text-[10px] h-5">Peak Hour</Badge>
-                            </div>
-                            <div className="bg-black/40 p-2 rounded border border-zinc-800 flex justify-between">
-                               <span>Laser Cut (Through Beams)</span> <Badge variant="secondary" className="text-[10px] h-5">Night</Badge>
-                            </div>
-                         </div>
-                      </div>
-                   </CardContent>
-                </Card>
-
-                {/* DRONE TECH SPECS */}
-                <div className="space-y-4">
-                   <TechSpecCard 
-                      title="Drone Specs"
-                      icon={<Plane className="text-cyan-400" />}
-                      specs={[
-                        "FPV: 4K 60fps (Stabilized)",
-                        "Mavic/Cinema: 5.1K ProRes",
-                        "ND Filters: Mandatory (maintain 180° shutter)",
-                        "Spotter: Always required."
-                      ]}
-                   />
-                </div>
-             </div>
-
-             <BriefSection 
-               mood="cyber"
-               title="Air Support Unit"
-               role="Sky Team"
-               image="https://images.unsplash.com/photo-1567215518282-e89662aad049?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
-               description="The Eye in the Sky. Show us the scale."
-               responsibilities={[
-                 "Feb 1-2: Pre-flight checks and site mapping. Find the 'No Fly Zones'.",
-                 "Weekend 1: Focus on crowd density and stage pyro shots.",
-                 "Weekend 2: Focus on sunset transitions and light shows.",
-                 "Reveal shots: Starting low behind a stage and rising to reveal the crowd."
-               ]}
-               deliverables={[
-                 "4K 60fps Log footage.",
-                 "High-res DNG photos of the full site (Day & Night).",
-                 "Uncut long takes for background video use."
-               ]}
-               notes="SAFETY: Do not fly over crowds at low altitude. Use zoom. If wind > 20km/h, ground the bird."
-             />
-          </TabsContent>
-
           {/* 5. SOCIAL & MOTION TAB */}
           <TabsContent value="smm" className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <UploadLinksCard />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card className="bg-zinc-900 border-zinc-800">
-                <CardHeader>
-                  <CardTitle className="text-blue-400 flex items-center gap-2"><Share2 /> SMM Strategy (TEA)</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="p-3 bg-blue-900/10 border border-blue-900/50 rounded">
-                    <h4 className="font-bold text-blue-200">The 30-Minute Rule</h4>
-                    <p className="text-sm text-zinc-400">Every 30 minutes, the story must be updated. No dead air.</p>
-                  </div>
-                  <ul className="space-y-2 text-zinc-300 text-sm list-disc pl-4">
-                    <li>Feb 3 (Pre-party): Tease the venue. "Almost ready".</li>
-                    <li>Weekend 1: "FOMO" generation. "You should be here".</li>
-                    <li>The Gap (Feb 7-11): Recap highlights, Artist thank yous, Hype for Wk2.</li>
-                    <li>Weekend 2: "Last Chance" messaging.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-zinc-900 border-zinc-800">
-                <CardHeader>
-                  <CardTitle className="text-purple-400 flex items-center gap-2"><Aperture /> Motion Design</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="p-3 bg-purple-900/10 border border-purple-900/50 rounded">
-                    <h4 className="font-bold text-purple-200">Asset Pack</h4>
-                    <p className="text-sm text-zinc-400">Use the provided 'Glitch Pack V2' for all overlays.</p>
-                  </div>
-                  <ul className="space-y-2 text-zinc-300 text-sm list-disc pl-4">
-                    <li>Animated Logos for intro/outro.</li>
-                    <li>"Live Now" overlays for stories.</li>
-                    <li>Artist Name lower-thirds (Cyber style).</li>
-                    <li>Countdown timers for headliners.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-
             <Card className="bg-zinc-900 border-zinc-800">
               <CardHeader>
                 <CardTitle className="text-[#FFBF00]">Social Run of Show — Guide</CardTitle>
@@ -1777,8 +1682,10 @@ export default function App() {
                   <h4 className="font-bold text-[#FFBF00]">Format Rules</h4>
                   <ul className="text-sm text-zinc-300 list-disc pl-4 mt-2 space-y-1">
                     <li>Story = live pulse. Use for doors, movement, and quick transitions.</li>
-                    <li>Social post = curated selects. Use for hero moments and space identity.</li>
-                    <li>Reel = 60s hero video with clear arc. Cutdowns supported.</li>
+                    <li>Social post = pictures/collages only.</li>
+                    <li>Story collages are mandatory for info items (wristbands, signage, wayfinding, map boards).</li>
+                    <li>Daily highlights reel after each day (end of night).</li>
+                    <li>Aftermovie reel after each 2 days.</li>
                   </ul>
                 </div>
 

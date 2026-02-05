@@ -16,11 +16,11 @@ const days: EventDayProps[] = [
   { date: "Feb 01-02", title: "Site Setup & Tech Recce", type: 'prep', hours: "09:00 - 18:00", focus: "Drone flight paths, Cable runs, Internet tests" },
   { date: "Feb 03", title: "THE PRE-PARTY", type: 'party', hours: "20:00 - 04:00", focus: "Intimate vibes, Low light, 'Behind the velvet rope' feel" },
   { date: "Feb 04", title: "Media Day", type: 'prep', hours: "14:00 - 18:00", focus: "Artist arrivals, Soundchecks, Empty venue grandeur" },
-  { date: "Feb 05", title: "WEEKEND 1 - DAY 1", type: 'main', hours: "14:00 - 02:00", focus: "The Reveal. Gates opening rush. First drops." },
-  { date: "Feb 06", title: "WEEKEND 1 - DAY 2", type: 'main', hours: "14:00 - 02:00", focus: "Crowd interactions, Sunset transitions, Mainstage pyro" },
+  { date: "Feb 05", title: "WEEKEND 1 - DAY 1", type: 'main', hours: "18:00 - 04:00", focus: "The Reveal. Gates opening rush. First drops." },
+  { date: "Feb 06", title: "WEEKEND 1 - DAY 2", type: 'main', hours: "18:00 - 04:00", focus: "Crowd interactions, Sunset transitions, Mainstage pyro" },
   { date: "Feb 07-11", title: "The Void (Edit Week)", type: 'rest', hours: "Remote / Hybrid", focus: "Editing rushes, Social hype maintenance, Re-charging" },
-  { date: "Feb 12", title: "WEEKEND 2 - DAY 1", type: 'main', hours: "14:00 - 02:00", focus: "New angles, Hidden corners, Specific artist requests" },
-  { date: "Feb 13", title: "GRAND FINALE", type: 'main', hours: "14:00 - 04:00", focus: "The Closing Ceremony. Emotion. Final fireworks. Sunrise." },
+  { date: "Feb 12", title: "WEEKEND 2 - DAY 1", type: 'main', hours: "18:00 - 04:00", focus: "New angles, Hidden corners, Specific artist requests" },
+  { date: "Feb 13", title: "GRAND FINALE", type: 'main', hours: "18:00 - 04:00", focus: "The Closing Ceremony. Emotion. Final fireworks. Sunrise." },
 ];
 
 export const ScheduleTimeline = () => {
